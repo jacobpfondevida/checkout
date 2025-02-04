@@ -133,7 +133,41 @@ export default defineComponent({
       }, 0);
     });
 
+    const validatePaymentForm = () => {
+      if (!payment.value.name || !payment.value.card_number || !payment.value.cvv || !payment.value.expiry_month || !payment.value.expiry_year) {
+        return 'All fields are required.';
+      }
+
+      const MIN_CARD_NUMBER_LENGTH = 13;
+      const MAX_CARD_NUMBER_LENGTH = 19;      
+      const cardNumberRegex = /^[0-9]{MIN_CARD_NUMBER_LENGTH,MAX_CARD_NUMBER_LENGTH}$/;
+      if (!cardNumberRegex.test(payment.value.card_number)) {
+        return 'Invalid card number.';
+      }
+
+      const MIN_CVV_LENGTH = 3;
+      const MAX_CVV_LENGTH = 4;
+      const cvvRegex = /^[0-9]{MIN_CVV_LENGTH,MAX_CVV_LENGTH}$/;
+      if (!cvvRegex.test(payment.value.cvv)) {
+        return 'Invalid CVV.';
+      }
+
+      const currentDate = new Date();
+      const expiryDate = new Date(`${payment.value.expiry_year}-${payment.value.expiry_month}-01`);
+      if (expiryDate <= currentDate) {
+        return 'Card has expired.';
+      }
+
+      return '';
+    };
+
     const submitPayment = async () => {
+      const validationError = validatePaymentForm();
+      if (validationError) {
+        alert(validationError);
+        return;
+      }
+
       try {
         const order = {
           items: cart.value.map(item => ({
