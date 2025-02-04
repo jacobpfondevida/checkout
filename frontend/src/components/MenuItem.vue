@@ -1,12 +1,12 @@
 <template>
-  <div class="menu-item">
-    <img :src="`/${item.image_id}.jpg`" :alt="item.name" class="menu-item-image" />
-    <h3>{{ item.name }}</h3>
-    <p class="price">${{ item.price.toFixed(2) }}</p>
-    <div class="menu-item-buttons">
-      <button @click="removeFromCart">-</button>
-      <span>{{ cartQuantity || 0 }}</span>
-      <button @click="addToCart">+</button>
+  <div class="menu-item border border-green-700 p-4 rounded-lg text-center bg-white shadow-md">
+    <img :src="`/${item.image_id}.jpg`" :alt="item.name" class="flex justify-center" />
+    <h3 class="text-xl font-semibold mt-2">{{ item.name }}</h3>
+    <p class="price text-lg font-bold text-green-700 mt-1">${{ item.price.toFixed(2) }}</p>
+    <div class="menu-item-buttons flex justify-center items-center gap-4 mt-2">
+      <button @click="removeFromCart" class="bg-gray-200 hover:bg-gray-300 text-gray-800 rounded px-3 py-1 transition">-</button>
+      <span class="w-12 text-center font-semibold">{{ cartQuantity || 0 }}</span>
+      <button @click="addToCart" class="bg-gray-200 hover:bg-gray-300 text-gray-800 rounded px-3 py-1 transition">+</button>
     </div>
   </div>
 </template>
@@ -48,34 +48,5 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.menu-item {
-  border: 1px solid #a0a307;
-  padding: 10px;
-  border-radius: 5px;
-  text-align: center;
-}
 
-.menu-item-buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-
-.menu-item-buttons button {
-  background-color: #ddd;
-  border: none;
-  padding: 5px;
-  cursor: pointer;
-}
-
-.menu-item-image {
-  max-width: 100px;
-  height: auto;
-}
-
-.price {
-  font-weight: bold;
-  color: rgb(85, 133, 30);
-}
 </style>

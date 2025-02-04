@@ -1,12 +1,21 @@
 <template>
-  <div>
-    <Menu 
-      :menu="menu" 
-      @add-to-cart="handleAddToCart" 
-      @remove-from-cart="handleRemoveFromCart" 
-    />
-    <Cart />
-    <button @click="handleCheckout">Proceed to Checkout</button>
+  <div class="flex min-h-screen min-w-screen justify-center bg-gray-100">
+    <div class="container mx-auto px-4 py-8 max-w-screen-xl">
+      <Menu 
+        :menu="menu" 
+        @add-to-cart="handleAddToCart" 
+        @remove-from-cart="handleRemoveFromCart" 
+      />
+      <Cart />
+      <div class="flex justify-center mt-8">
+        <button 
+          @click="handleCheckout" 
+          class="px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+        >
+          Proceed to Checkout
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -68,5 +77,5 @@ export default defineComponent({
 </script>
 
 <style scoped>
-/* Additional Home.vue styling if needed */
+
 </style>

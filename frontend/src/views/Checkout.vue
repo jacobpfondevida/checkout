@@ -1,38 +1,94 @@
 <template>
-  <div class="checkout">
-    <h1>Checkout</h1>
-    <Cart/>
-    <form @submit.prevent="submitPayment">
-      <div>
-        <label for="name">Name on Card</label>
-        <input type="text" id="name" v-model="payment.name" required />
+  <div class="flex min-w-screen justify-center">
+    <div class="bg-gray-100 w-full px-4 py-8 max-w-screen-lg">
+      <h1 class="text-3xl font-bold text-center mb-8">Checkout</h1>
+      
+      <!-- Cart Summary Section -->
+      <div class="mb-8">
+        <Cart />
       </div>
-      <div>
-        <label for="cardNumber">Card Number</label>
-        <input type="text" id="cardNumber" v-model="payment.cardNumber" required />
-      </div>
-      <div>
-        <label for="expiryMonth">Expiry Month</label>
-        <select id="expiryMonth" v-model="payment.expiryMonth" required>
-          <option v-for="month in months" :key="month.value" :value="month.value">
-            {{ month.label }}
-          </option>
-        </select>
-      </div>
-      <div>
-        <label for="expiryYear">Expiry Year</label>
-        <select id="expiryYear" v-model="payment.expiryYear" required>
-          <option v-for="year in years" :key="year" :value="year">
-            {{ year }}
-          </option>
-        </select>
-      </div>
-      <div>
-        <label for="cvv">CVV</label>
-        <input type="text" id="cvv" v-model="payment.cvv" required />
-      </div>
-      <button type="submit">Submit Payment</button>
-    </form>
+      
+      <!-- Payment Form -->
+      <form @submit.prevent="submitPayment" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div class="mb-4">
+          <label for="name" class="block text-gray-700 text-sm font-bold mb-2">
+            Name on Card
+          </label>
+          <input
+            type="text"
+            id="name"
+            v-model="payment.name"
+            required
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+        </div>
+        <div class="mb-4">
+          <label for="cardNumber" class="block text-gray-700 text-sm font-bold mb-2">
+            Card Number
+          </label>
+          <input
+            type="text"
+            id="cardNumber"
+            v-model="payment.cardNumber"
+            required
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+        </div>
+        <div class="flex mb-4 space-x-4">
+          <div class="w-1/2">
+          <label for="cvv" class="block text-gray-700 text-sm font-bold mb-2">
+            CVV
+          </label>
+          <input
+            type="text"
+            id="cvv"
+            v-model="payment.cvv"
+            required
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          />
+          </div>
+          <div class="w-1/4">
+            <label for="expiryMonth" class="block text-gray-700 text-sm font-bold mb-2">
+              Expiry Month
+            </label>
+            <select
+              id="expiryMonth"
+              v-model="payment.expiryMonth"
+              required
+              class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            >
+              <option v-for="month in months" :key="month.value" :value="month.value">
+                {{ month.label }}
+              </option>
+            </select>
+          </div>
+          <div class="w-1/4">
+            <label for="expiryYear" class="block text-gray-700 text-sm font-bold mb-2">
+              Expiry Year
+            </label>
+            <select
+              id="expiryYear"
+              v-model="payment.expiryYear"
+              required
+              class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            >
+              <option v-for="year in years" :key="year" :value="year">
+                {{ year }}
+              </option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="flex items-center justify-center">
+          <button
+            type="submit"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition"
+          >
+            Submit Payment
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -85,23 +141,5 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.checkout {
-  max-width: 500px;
-  margin: 2rem auto;
-  padding: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-.checkout form > div {
-  margin-bottom: 1rem;
-}
-.checkout label {
-  display: block;
-  margin-bottom: 0.5rem;
-}
-.checkout input {
-  width: 100%;
-  padding: 0.5rem;
-  box-sizing: border-box;
-}
+
 </style>
