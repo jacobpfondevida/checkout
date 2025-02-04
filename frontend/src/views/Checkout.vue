@@ -94,8 +94,9 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue';
-import { useCartStore } from '@/store/cartStore';
+import { handleApiError } from '@/utils/axiosErrorHandler';
 
+import { useCartStore } from '@/store/cartStore';
 import Cart from "@/components/Cart.vue";
 import type { PaymentInfo } from '@/types/PaymentInfo.ts';
 
@@ -154,11 +155,10 @@ export default defineComponent({
         if (response.status === 200) {
           alert('Payment submitted successfully!');
         } else {
-          alert('Payment submission failed!');
+          alert('Payment submission failed with status: ${response.status}');
         }
       } catch (error) {
-        console.error('Error submitting payment:', error);
-        alert('An error occurred while processing the payment.');
+        handleApiError(error);
       }
     };
 

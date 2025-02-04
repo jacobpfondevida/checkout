@@ -25,6 +25,7 @@ import Cart from "@/components/Cart.vue";
 import type { MenuItemType } from "@/types/MenuItemType";
 
 import apiClient from "@/services/apiClient";
+import { handleApiError } from "@/utils/axiosErrorHandler";
 
 export default defineComponent({
   name: "Home",
@@ -43,7 +44,7 @@ export default defineComponent({
         const response = await apiClient.get("/menu");
         menu.value = response.data;
       } catch (error) {
-        console.error("Error fetching menu:", error);
+        handleApiError(error);
       }
     };
 
