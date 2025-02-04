@@ -3,19 +3,23 @@
     <h2>Your Cart</h2>
     <ul v-if="cart.length">
       <li v-for="(cartItem, index) in cart" :key="cartItem.id" class="cart-item">
-        <span>
-          {{ cartItem.name }} - 
-          ${{ (cartItem.price * cartItem.quantity!).toFixed(2) }}
-          <div class="quantity-buttons">
+        <div class="item-info">
+        <span class="item-name">{{ cartItem.name }}</span>
+          <span class="price">
+            ${{ (cartItem.price * cartItem.quantity!).toFixed(2) }}
+          </span>
+          <div class="quantity-controls">
             <button @click="decrementQuantity(cartItem)">-</button>
             <span>{{ cartItem.quantity }}</span>
             <button @click="incrementQuantity(cartItem)">+</button>
           </div>
-        </span>
+        </div>
       </li>
     </ul>
     <p v-else>Your cart is empty.</p>
-    <p v-if="cart.length">Total: ${{ total.toFixed(2) }}</p>
+    <div class="total" v-if="cart.length">
+      <p>Total: ${{ total.toFixed(2) }}</p>
+    </div>
   </div>
 </template>
   
@@ -56,49 +60,80 @@
   </script>
   
   <style scoped>
-  .cart {
+.cart {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
   border: 1px solid #ccc;
-  padding: 16px;
   border-radius: 8px;
-  margin-top: 1rem;
+  font-family: var(--font-family, sans-serif);
 }
+
+.cart h2 {
+  text-align: center;
+  color: var(--primary-color, #4a90e2);
+}
+
+.cart ul {
+  list-style: none;
+  padding: 0;
+}
+
 .cart-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
+  padding: 0.5rem;
+  border-bottom: 1px solid #eee;
 }
-.cart-item-info {
+
+.item-info {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 100%;
+  flex-wrap: wrap;
+  gap: 1rem;
+  flex: 1;
 }
-.cart-item-info span {
-  margin-right: 10px;
-}
-.price {
+
+.item-name {
   font-weight: bold;
-  color: rgb(85, 133, 30);
 }
-.quantity-buttons {
-  display: inline-flex;
+
+.price {
+  color: var(--secondary-color, #50e370);
+  margin-right: 1rem;
+}
+
+.quantity-controls {
+  display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 0.5rem;
 }
-.quantity-buttons button {
-  background-color: #ddd;
-  border: none;
-  padding: 4px 8px;
-  cursor: pointer;
-}
-.cart-item button {
-  background-color: #ff4d4f;
-  color: #fff;
-  border: none;
-  padding: 4px 8px;
+
+.quantity-controls input {
+  width: 50px;
+  text-align: center;
+  padding: 0.2rem;
+  border: 1px solid #ddd;
   border-radius: 4px;
-  cursor: pointer;
 }
-  </style>
-  
+
+button {
+  cursor: pointer;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.total {
+  text-align: right;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+</style>
