@@ -57,7 +57,7 @@ export default defineComponent({
     emits: ["add-to-cart", "remove-from-cart"],
     setup(props, { emit }) {
         const groupedItems = computed(() => {
-        const groups: Record<number, MenuItemType[]> = {};
+        const groups: Record<string, MenuItemType[]> = {};
         props.menu.items.forEach((item: MenuItemType) => {
         if (!groups[item.category_id]) {
             groups[item.category_id] = [];

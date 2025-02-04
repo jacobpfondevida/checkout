@@ -1,0 +1,1 @@
+{"items": [{"category_id": 1, "id": 2, "image_id": "808916fd5ddf96", "name": "Croissant", "price": 1.0, "quantity": 2}], "total": 2.0, "payment": {"name": "Test Name", "card_number": "1234", "expiry_month": "8", "expiry_year": "2029", "cvv": "123"}}

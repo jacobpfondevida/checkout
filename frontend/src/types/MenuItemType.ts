@@ -1,6 +1,6 @@
 export interface MenuItemType {
-    category_id: number;
-    id: number;
+    category_id: string;
+    id: string;
     image_id: string;
     name: string;
     price: number;

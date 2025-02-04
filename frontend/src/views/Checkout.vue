@@ -23,13 +23,13 @@
           />
         </div>
         <div class="mb-4">
-          <label for="cardNumber" class="block text-gray-700 text-sm font-bold mb-2">
+          <label for="card_number" class="block text-gray-700 text-sm font-bold mb-2">
             Card Number
           </label>
           <input
             type="text"
-            id="cardNumber"
-            v-model="payment.cardNumber"
+            id="card_number"
+            v-model="payment.card_number"
             required
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
@@ -48,12 +48,12 @@
           />
           </div>
           <div class="w-1/5">
-            <label for="expiryMonth" class="block text-gray-700 text-sm font-bold mb-2">
+            <label for="expiry_month" class="block text-gray-700 text-sm font-bold mb-2">
               Expiry Month
             </label>
             <select
-              id="expiryMonth"
-              v-model="payment.expiryMonth"
+              id="expiry_month"
+              v-model="payment.expiry_month"
               required
               class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             >
@@ -63,12 +63,12 @@
             </select>
           </div>
           <div class="w-1/5">
-            <label for="expiryYear" class="block text-gray-700 text-sm font-bold mb-2">
+            <label for="expiry_year" class="block text-gray-700 text-sm font-bold mb-2">
               Expiry Year
             </label>
             <select
-              id="expiryYear"
-              v-model="payment.expiryYear"
+              id="expiry_year"
+              v-model="payment.expiry_year"
               required
               class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             >
@@ -95,8 +95,11 @@
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue';
 import { useCartStore } from '@/store/cartStore';
+
 import Cart from "@/components/Cart.vue";
 import type { PaymentInfo } from '@/types/PaymentInfo.ts';
+
+import apiClient from "@/services/apiClient";
 
 export default defineComponent({
   name: 'Checkout',
@@ -106,19 +109,19 @@ export default defineComponent({
   setup() {
     const payment = ref<PaymentInfo>({
       name: '',
-      cardNumber: '',
-      expiryMonth: 0,
-      expiryYear: 0,
+      card_number: '',
+      expiry_month: '',
+      expiry_year: '',
       cvv: '',
     });
 
     const months = Array.from({ length: 12 }, (_, i) => ({
-      value: i + 1,
+      value: (i + 1).toString(),
       label: (i + 1).toString().padStart(2, '0'), 
     }));
 
     const currentYear = new Date().getFullYear();
-    const years = Array.from({ length: 10 }, (_, i) => currentYear + i);
+    const years = Array.from({ length: 10 }, (_, i) => (currentYear + i).toString());
 
     const cartStore = useCartStore();
     const cart = computed(() => cartStore.cart);
@@ -129,10 +132,34 @@ export default defineComponent({
       }, 0);
     });
 
-    const submitPayment = () => {
-      // TODO: API Call to save payment
-      console.log("Payment submitted:", payment.value);
-      alert(`"Payment submitted successfully! Payment: ${payment.value.expiryMonth}/${payment.value.expiryYear}"`);
+    const submitPayment = async () => {
+      try {
+        const order = {
+          items: cart.value.map(item => ({
+            category_id: item.category_id, 
+            id: item.id,
+            image_id: item.image_id,  
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity
+          })),
+          total: total.value,
+          payment: payment.value,
+        };
+
+        console.log(order);
+
+        const response = await apiClient.post('/order', order);
+
+        if (response.status === 200) {
+          alert('Payment submitted successfully!');
+        } else {
+          alert('Payment submission failed!');
+        }
+      } catch (error) {
+        console.error('Error submitting payment:', error);
+        alert('An error occurred while processing the payment.');
+      }
     };
 
     return { payment, months, years, total, submitPayment };

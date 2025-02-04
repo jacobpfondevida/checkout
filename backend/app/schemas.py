@@ -1,15 +1,19 @@
 from pydantic import BaseModel
 
-class MenuItem(BaseModel):
+class MenuItem(BaseModel): 
+    category_id: int
     id: int
+    image_id: str
     name: str
     price: float
-    category: str
-    image: str
+    quantity: int
 
 class Payment(BaseModel):
     name: str
-    card: str
+    card_number: str
+    expiry_month: str
+    expiry_year: str
+    cvv: str
 
 class Order(BaseModel):
     items: list[MenuItem]
