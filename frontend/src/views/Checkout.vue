@@ -35,7 +35,7 @@
           />
         </div>
         <div class="flex mb-4 space-x-4">
-          <div class="w-1/2">
+          <div class="w-3/5">
           <label for="cvv" class="block text-gray-700 text-sm font-bold mb-2">
             CVV
           </label>
@@ -47,7 +47,7 @@
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
           />
           </div>
-          <div class="w-1/4">
+          <div class="w-1/5">
             <label for="expiryMonth" class="block text-gray-700 text-sm font-bold mb-2">
               Expiry Month
             </label>
@@ -62,7 +62,7 @@
               </option>
             </select>
           </div>
-          <div class="w-1/4">
+          <div class="w-1/5">
             <label for="expiryYear" class="block text-gray-700 text-sm font-bold mb-2">
               Expiry Year
             </label>
