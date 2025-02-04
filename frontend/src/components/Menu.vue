@@ -41,45 +41,44 @@ import type { MenuItemType } from "@/types/MenuItemType";
 import type { Category } from "@/types/Category";
 
 export default defineComponent({
-name: "Menu",
-components: {
-MenuItem,
-},
-props: {
-menu: {
-type: Object as PropType<{
-categories: Category[];
-items: MenuItemType[];
-}>,
-required: true,
-},
-},
-emits: ["add-to-cart", "remove-from-cart"],
-setup(props, { emit }) {
-const groupedItems = computed(() => {
-const groups: Record<number, MenuItemType[]> = {};
-props.menu.items.forEach((item: MenuItemType) => {
-if (!groups[item.category_id]) {
-groups[item.category_id] = [];
-}
-groups[item.category_id].push(item);
-});
-return groups;
-});
+    name: "Menu",
+    components: {
+        MenuItem,
+    },
+    props: {
+        menu: {
+            type: Object as PropType<{
+                categories: Category[]; 
+                items: MenuItemType[];
+            }>,
+            required: true,
+            },
+    },
+    emits: ["add-to-cart", "remove-from-cart"],
+    setup(props, { emit }) {
+        const groupedItems = computed(() => {
+        const groups: Record<number, MenuItemType[]> = {};
+        props.menu.items.forEach((item: MenuItemType) => {
+        if (!groups[item.category_id]) {
+            groups[item.category_id] = [];
+        }
+            groups[item.category_id].push(item);
+        });
+        return groups;
+    });
 
-const handleAddToCart = (item: MenuItemType) => {
-emit("add-to-cart", item);
-};
+    const handleAddToCart = (item: MenuItemType) => {
+        emit("add-to-cart", item);
+    };
 
-const handleRemoveFromCart = (item: MenuItemType) => {
-emit("remove-from-cart", item);
-};
+    const handleRemoveFromCart = (item: MenuItemType) => {
+        emit("remove-from-cart", item);
+    };
 
-return { groupedItems, handleAddToCart, handleRemoveFromCart };
-},
+    return { groupedItems, handleAddToCart, handleRemoveFromCart };
+    },
 });
 </script>
 
 <style scoped>
-
 </style>
