@@ -4,6 +4,7 @@
       <!-- Loop over each category -->
       <div v-for="category in menu.categories" :key="category.id" class="category-section">
         <h2>{{ category.name }}</h2>
+        <img :src="`/${category.image_id}.jpg`" :alt="category.name" class="category-item-image" />
         <!-- Render items for this category -->
         <div class="menu-list" v-if="groupedItems[category.id] && groupedItems[category.id].length">
           <MenuItem
