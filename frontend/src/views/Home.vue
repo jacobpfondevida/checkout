@@ -37,6 +37,9 @@ export default defineComponent({
     const router = useRouter();
     const cartStore = useCartStore();
 
+    const apiBaseUrl: string = import.meta.env.VITE_API_BASE_URL;
+    console.log(apiBaseUrl);
+
     // TODO: Replace with an API call
     const menu = ref({
       categories: [
