@@ -39,7 +39,8 @@ For the backend, make sure the API is set to run on port 8000. This is already c
 
 ### 3. Running the Application Using Docker
 
-1. In the root of your project, run the following command to build and start the containers:
+1. Ensure Docker is running on your machine.
+2. In the root of your project, run the following command to build and start the containers:
 
 ```bash
 docker-compose up --build
@@ -51,12 +52,41 @@ This will:
 - Start both the frontend and backend services.
 - Expose the frontend on `http://localhost:8080` and the backend on `http://localhost:8000`.
 
-2. Access the app:
+3. Access the app:
 
 - Frontend: [http://localhost:8080](http://localhost:8080)
 - Backend Docs: [http://localhost:8000](http://localhost:8000/docs)
 
-### 4. Frontend Development (Optional)
+The app will look like this:
+
+#### Menu
+
+![Menu](images/menu.png)
+
+#### Checkout:
+
+![Checkout](images/checkout.png)
+
+### 4. Viewing orders
+
+To view orders placed, use Docker desktop:
+![docker_screen_one](images/desktop_docker_screen1.png)
+
+
+Select backend, then navigate to Files.
+In `backend/data/` there will be a file called `orders.json` that stores successful orders.
+
+![Backend Files](images/docker_screen2.png)
+
+`orders.json` will look like this:
+
+![Example order.json](images/example_order_json.png)
+
+### 5. Closing Docker
+
+To close Docker, navigate back to the terminal running Docker and press `CTRL+C`.
+
+### 6. Frontend Development (Optional)
 
 To develop the frontend locally without Docker:
 
@@ -69,7 +99,7 @@ npm run dev
 
 This will start a local development server on `http://localhost:5173`.
 
-### 5. Backend Development (Optional)
+### 7. Backend Development (Optional)
 
 To run the backend locally:
 
@@ -104,25 +134,6 @@ fastapi dev app/main.py
 ```
 
 This will run the backend at `http://127.0.0.1:8000`.
-
-### 6. Viewing orders
-
-To view orders placed, use Docker desktop:
-![docker_screen_one](images/desktop_docker_screen1.png)
-
-
-Select backend, then navigate to Files.
-In `backend/data/` there will be a file called `orders.json` that stores successful orders.
-
-![Backend Files](images/docker_screen2.png)
-
-`orders.json` will look like this:
-
-![Example order.json](images/example_order_json.png)
-
-### 7. Closing Docker
-
-To close Docker, navigate back to the terminal running Docker and press `CTRL+C`.
 
 ---
 
