@@ -116,6 +116,8 @@ In `backend/data/` there will be a file called `orders.json` that stores success
 
 ![Backend Files](images/docker_screen2.png)
 
+`orders.json` will look like this:
+
 ![Example order.json](images/example_order_json.png)
 
 ### 7. Closing Docker
@@ -127,6 +129,6 @@ To close Docker, navigate back to the terminal running Docker and press `CTRL+C`
 
 ## Technologies Used
 
-- **Frontend**: Vue.js, Vite, TailwindCSS
+- **Frontend**: TypeScript, Vue, Vite, TailwindCSS, Pinia, Axios
 - **Backend**: FastAPI, Python
-- **Containerization**: Docker, Docker Compose
+- **Containerization**: Docker
